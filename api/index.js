@@ -19,9 +19,30 @@
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
-
+const axios = require("axios")
+const { Country } = require("./src/db")
 // Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
+conn.sync({ force: true }).then(async () => {
+
+  const bD = await Country.findAll()
+  if (bD.length < 1) {
+    const carga = await axios.get("https://restcountries.com/v3.1/all")
+    const Info = await carga.data?.map(el => {
+      return {
+        idName: el.cca3,
+        name: el.name.common,
+        image: el.flags.png,
+        continent: el.continents,
+        capital: el.capital,
+        subregion: el.subregion,
+        area: el.area,
+        population: el.population
+      }
+    })
+    const dbSave = await Country.bulkCreate(Info)
+
+  }
+
   server.listen(3001, () => {
     console.log('%s listening at 3001'); // eslint-disable-line no-console
   });
