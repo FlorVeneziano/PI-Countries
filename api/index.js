@@ -22,11 +22,12 @@ const { conn } = require('./src/db.js');
 const axios = require("axios")
 const { Country } = require("./src/db")
 // Syncing all the models at once.
-conn.sync({ force: true }).then(async () => {
+conn.sync().then(async () => {
 
   const bD = await Country.findAll()
   if (bD.length < 1) {
     const carga = await axios.get("https://restcountries.com/v3.1/all")
+
     const Info = await carga.data?.map(el => {
       return {
         idName: el.cca3,

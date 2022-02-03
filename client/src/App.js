@@ -1,9 +1,24 @@
+import React, { useState } from 'react';
+import Landing from './components/landing/Landing';
+import Countries from './components/countries/Countries'
+import CountryDetail from "./components/CountryDetail/CountryDetail"
+import Nav from "./components/Nav/Nav"
+import SearchBar from "./components/SearchBar/SearchBar"
+import { Route } from 'react-router-dom';
+import Form from "./components/Form/Form"
 import './App.css';
 
+
 function App() {
+
   return (
     <div className="App">
-      <h1>Henry Countries</h1>
+      <Route exact path="/" component={Landing} />
+      <Route exact path="/activity" component={Form} />
+      <Route path="/countries" component={Nav} />
+      <Route path="/countries" component={SearchBar} />
+      <Route exact path="/countries" component={Countries} />
+      <Route exact path="/countries/:idName" component={CountryDetail} />
     </div>
   );
 }

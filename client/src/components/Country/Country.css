@@ -1,0 +1,30 @@
+.card{
+    background-color: rgba(245, 245, 245, 0.082);
+    backdrop-filter: blur(5px);
+    border-radius: 5%;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.25);
+    padding-bottom: 10px;
+    width:350px;
+    height: 350px;
+    text-decoration: none;
+}
+
+.flag{
+    border-radius: 8px ;
+    box-shadow: 0 8px 8px 0 rgba(0,0,0,0.75) ;
+    margin: 0px;
+    width: 220px;
+    height:150px ;
+}
+
+a:link, a:visited,  a:hover, a:active
+{
+    color: #000000;
+    text-decoration: none;
+}
+.text{
+    color: rgb(233, 233, 233);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.75) ;
+}
+
+
