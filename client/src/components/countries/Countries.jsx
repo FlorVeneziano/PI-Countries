@@ -26,9 +26,14 @@ import Filter from "../Filter/Filter";
         <div id="background"> 
              <img src={imageBackground} className="stretch" alt="" />  
         </div>
+        <div className="panel">
+        <div className="Filtros">
           <Filter setPage= {setPage} setOrder={setOrder} page={page}/>
             <Pagination page={page} setPage={setPage} max={max} />
+            </div>
+            </div>
         <div className="countries">
+      
             {
                 props.countries?.slice((page-1) * perPage, (page - 1) * perPage + perPage ).map( c => ( // 0 * 10 = 0 , 0*10= 0 + 10 = 10 
                     <Country 
@@ -43,7 +48,7 @@ import Filter from "../Filter/Filter";
                     ))
                     
                 }
-           
+
       </div>   
       </>
     )

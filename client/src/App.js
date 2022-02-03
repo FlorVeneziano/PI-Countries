@@ -16,7 +16,6 @@ function App() {
       <Route exact path="/" component={Landing} />
       <Route exact path="/activity" component={Form} />
       <Route path="/countries" component={Nav} />
-      <Route path="/countries" component={SearchBar} />
       <Route exact path="/countries" component={Countries} />
       <Route exact path="/countries/:idName" component={CountryDetail} />
     </div>

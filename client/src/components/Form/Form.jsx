@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { connect, useDispatch } from "react-redux";
-import { getAllCountries  } from "../../actions";
+import { Link } from "react-router-dom";
+import { getAllCountries } from "../../actions";
+import imageBackground from "../../img/fondoActivity.jpg"
 import "./Form.css"
 
 
@@ -35,14 +37,30 @@ const Form = (props) => {
             ...value,
             [e.target.name] : e.target.value
         }))
+        setErrorsValue(validateValue({
+            ...value,
+            countries: [...value.countries, e.target.value]
+        }))
+    }
+    const removeCountry = (e) =>{
+        setValue({  
+            ...value,
+            countries: value.countries.filter(c => c !== e.target.name)
+        })
+
     }
 
     
     
     return(
-        <div>
-            <form onSubmit={handleSubmit}>
-            <input name="name"  value={value.name} placeholder="Activity name..." onChange={e=> handleChange(e)}/>
+        <>
+        <div id="background"> 
+             <img src={imageBackground} className="stretch" alt="" />  
+        </div>
+        <div className="divContainer">
+            <form className="container" onSubmit={e => handleSubmit(e)}>
+            <h1>New Activity</h1>
+            <input className="activityName" name="name"  value={value.name} placeholder="Activity name..." onChange={e=> handleChange(e)}/>
             <p className="danger">{errorsValue.name}</p>
             <div>
             <select name="duration" value={value.duration} onChange={handleChange}>
@@ -84,14 +102,11 @@ const Form = (props) => {
                         ...value,
                         countries: [...value.countries, e.target.value]
                     })
-                    setErrorsValue(validateValue({
-                        ...value,
-                        countries: [...value.countries, e.target.value]
-                    }))
                     }}>
                     <option hidden selected>Country</option>
                     {
                       props.countries?.map(c =>{
+                          
                             return(
                             <option key={c.id}>{c.name}</option>
                             )
@@ -105,18 +120,29 @@ const Form = (props) => {
             <button type="submit" >Create Activity</button>
             </div>
             </form>
-            <div>
+            <div className="countriesList">
                 <ul>
                 {
                     value.countries?.map(el => {
-                      return ( <p className="lista" key={el.id}>{el}</p>)
+                      return ( 
+                          <div key={el.id}>
+                      <p className="lista">{el}</p>
+                       <button name={el}className="closeButton" onClick={(e) => { removeCountry(e) }}>x</button>
+                       </div>
+                   )
                     })
                 }
                 </ul>
             </div>
         </div>
+        <Link to={"/countries"} >
+            <button>Go to Main Page</button>
+        </Link>
+        </>
     )
 }
+
+
 
 function validateValue(value){
     let errors = {}
@@ -147,8 +173,11 @@ function repetidos(array){
 
 const mapStateToProps = (state) =>{
     return{
-        countries: state.countries
+        countries: state.countries,
+       
     }
 }
+
+
 
 export default connect(mapStateToProps)(Form)

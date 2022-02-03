@@ -5,6 +5,7 @@ export const GET_BY_NAME = "GET_BY_NAME";
 export const ORDER_SORT = "ORDER_SORT";
 export const ORDER_POPULATION = "ORDER_POPULATION";
 export const ORDER_CONTINENT = "ORDER_CONTINENT";
+export const POST_ACTIVITY = "POST_ACTIVITY";
 const DBCOUNTRIES = "http://localhost:3001/countries/";
 
 
@@ -57,29 +58,30 @@ export function getByName(name) {
             })
     }
 }
-// export function getCountry(id) {
-//     return function (dispatch) {
-//         return fetch(`http://localhost:3001/countries/${id}`)
-//             .then(response => response.json())
-//             .then(res => {
-//                 console.log(res)
-//                 dispatch({
-//                     type: GET_COUNTRY,
-//                     payload: res
-//                 })
+export function getCountry(id) {
+    return function (dispatch) {
+        return fetch(`http://localhost:3001/countries/${id}`)
+            .then(response => response.json())
+            .then(res => {
+                console.log(res)
+                dispatch({
+                    type: GET_COUNTRY,
+                    payload: res
+                })
 
-//             })
-//     }
-// }
-export const getCountry = (id) => {
-    return async dispatch => {
-        let response = await axios.get(`http://localhost:3001/countries/${id}`)
-        dispatch({
-            type: GET_COUNTRY,
-            payload: response.data
-        })
+            })
     }
 }
+// export const getCountry = (id) => {
+//     return async dispatch => {
+//         let response = await axios.get(`http://localhost:3001/countries/${id}`)
+//         dispatch({
+//             type: GET_COUNTRY,
+//             payload: response.data
+//         })
+//     }
+// }
+
 
 export const orderSort = (payload) => {
     return {
@@ -100,3 +102,4 @@ export const orderContinent = (payload) => {
         payload
     }
 }
+

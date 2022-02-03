@@ -1,0 +1,27 @@
+.navBar{
+    position: fixed;
+    top: 0%;
+    width: 100%;
+    background-color: rgba(23, 14, 47, 0.424);
+    backdrop-filter: blur(5px);
+    z-index: 100;
+}
+a.ulNav{
+    color: rgb(233, 233, 233);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.75) ;
+    font-weight: bolder;
+    font-size: 20px;
+    -webkit-text-stroke: 0.5px black;
+    cursor: pointer;
+}
+
+.ulNav:hover{
+    text-shadow: 3px 3px 5px rgb(255, 255, 255) ;
+
+}
+
+.cosas{
+    display: flex;
+    justify-content: center;
+    justify-content: space-evenly;
+}

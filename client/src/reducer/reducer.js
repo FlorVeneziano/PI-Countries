@@ -2,7 +2,8 @@ import { GET_ALL, GET_BY_NAME, GET_COUNTRY, ORDER_SORT, ORDER_POPULATION, ORDER_
 
 const initialState = {
     countries: [],
-    countryDetail: {}
+    countryDetail: {},
+
 }
 
 function rootReducer(state = initialState, action) {
@@ -78,6 +79,8 @@ function rootReducer(state = initialState, action) {
                 ...state,
                 countries: countriesFilter
             }
+
+
         default: {
             return state
         }

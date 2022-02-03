@@ -1,15 +1,17 @@
 import React from "react";
+import "./Nav.css"
 
 import { NavLink } from "react-router-dom";
+import SearchBar from "../SearchBar/SearchBar";
 
 
 function Nav(props){
     return(
-        <header>
-            <nav>
-                <ul >
-                        <NavLink exact to="/countries">Home</NavLink>
-                        <NavLink exact to="/activity">Create Activity</NavLink>
+        <header className="navBar" >
+            <nav >
+                <ul className="cosas">
+                        <NavLink exact to="/activity"  className="ulNav">Create Activity</NavLink>
+                        <SearchBar />
                 </ul>
             </nav>
         </header>

@@ -7,20 +7,40 @@
     top: 0px; 
     z-index: -9999;
  }
-    
+
 .stretch { 
     width:100%; 
     height:100%; 
 }
 .countries{
     margin-top: 50px;
+    margin-left: 10%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
     grid-column-gap: 5px;
     grid-row-gap: 100px;
+  
+   
 }
+
+
 body{
     color: white;
-
+    margin: 0
+}
+.Filtros{
+    background-color: rgba(23, 14, 47, 0.424);
+    backdrop-filter: blur(5px);
+    border-radius: 5px;
+    width: 550px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin-top: 100px;
+}
+.panel{
+    display: flex;
+    justify-content: center;
 }
