@@ -31,7 +31,7 @@ function Filter({setPage, setOrder, page}){
     return(
         <div>
              <select>
-                  <option>Sort by Activities</option>
+                  <option hidden selected>Sort by Activities</option>
                     <option value="Activity">Turist Activity</option>
                 </select>
                 <select onChange={e => handleContinent(e)}>
@@ -43,12 +43,12 @@ function Filter({setPage, setOrder, page}){
                 <option value="Oceania">Oceania</option>
                 </select>
                 <select  onChange={e => handleSort(e)}>
-                    <option>Alphabetic</option>
+                    <option hidden selected>Alphabetic</option>
                     <option value="Asc">A-Z</option>
                     <option value="Desc">Z-A</option>
                 </select>
                 <select onChange={e=> handlePopulation(e)}>
-                <option>Sort by Population </option>
+                <option hidden selected>Sort by Population </option>
                     <option value="Asc">Ascending Population</option>
                     <option value="Desc">Descending Population</option>
                 </select>

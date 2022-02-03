@@ -1,0 +1,19 @@
+.danger {
+    color: red;
+    font-weight: bold;
+    font-size: 10px;
+    margin-top: 2px;
+    margin-bottom: 2px ;
+   margin-right: 10px;
+  }
+
+  .difficulty-season{
+    display: flex;
+    justify-content: center;
+  }
+  .dif-ses{
+    margin-right: 10px;
+  }
+  .lista{
+      color: black;
+  }
