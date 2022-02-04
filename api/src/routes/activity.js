@@ -5,20 +5,24 @@ const router = Router();
 
 
 router.post('/', async (req, res) => {
-    const { activity, countries } = req.body;
+    const { name, difficulty, duration, season, countries } = req.body;
 
+
+    const activities = await Activity.create({ name: name, difficulty: difficulty, duration: duration, season: season })
+    console.log(activities)
     try {
-        const activities = await Activity.create(activity)
-        countries.forEach(async country => {
+        countries.map(async country => {
             let search = await Country.findAll({ where: { id: country } })
             if (search) {
                 activities.addCountry(country)
             }
         })
-        res.send("Actividad creada")
+        res.send("Se creo correctamente la actividad")
     } catch (e) {
-        res.json({ msg: "Error al asignar la actividad" })
+        res.status(400).send("Error al crear la actividad " + e)
     }
+
+
 })
 
 

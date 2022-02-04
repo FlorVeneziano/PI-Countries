@@ -2,3 +2,65 @@ h1{
     margin: 50px;
     z-index: 1;
 }
+p{
+    font-weight:700;
+}
+
+#activities {
+    display: flex;
+    flex-direction:column;
+    background-color:  rgba(32, 33, 33, 0.453);
+    backdrop-filter: blur(5px);
+    border-radius: 5%;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.25);
+    padding-bottom: 10px;
+    width: 50%;
+    height: 500px;
+    text-decoration: none;
+}
+
+#information{
+    display: inline-flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: stretch;
+    justify-content: center;
+    justify-content: space-evenly;
+    align-items: stretch;
+    background-color: rgba(32, 33, 33, 0.453);
+    backdrop-filter: blur(5px);
+    border-radius: 5%;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.25);
+    padding-bottom: 10px;
+    width: 70%;
+    height: 550px;
+    text-decoration: none;
+}
+
+#title{
+    display: flex;
+    justify-content: center;
+}
+.data{
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+#countryDetail{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+.infoContainer{
+    display: grid;
+    grid-area: 1 / 1 / 4 / 4; 
+    justify-items: end;
+}
+
+.activityContainer{
+    display: grid;
+    grid-area: 1 / 4 / 4 / 6;
+    justify-items: center;
+}

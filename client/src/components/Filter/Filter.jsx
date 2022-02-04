@@ -37,7 +37,8 @@ function Filter({setPage, setOrder, page}){
                 <select onChange={e => handleContinent(e)}>
                 <option value="All">All Continents</option>
                 <option value="Africa">Africa</option>
-                <option value="America">America</option>
+                <option value="South America">South America</option>
+                <option value="North America">North America</option>
                 <option value="Asia">Asia</option>
                 <option value="Europe">Europe</option>
                 <option value="Oceania">Oceania</option>

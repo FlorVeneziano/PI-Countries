@@ -2,53 +2,61 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { connect, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { getAllCountries } from "../../actions";
+import { createActivity, getAllCountries } from "../../actions";
+import axios from "axios";
 import imageBackground from "../../img/fondoActivity.jpg"
 import "./Form.css"
+
 
 
 const Form = (props) => {
     const dispatch = useDispatch()
     const[errorsValue, setErrorsValue] = useState({})
-    const [value, setValue] = useState({
+    const [activity, setActivity] = useState({
         name: "",
-        duration: "",
         difficulty: "",
+        duration: "",
         season: "",
         countries: []
     })
-
+    const [name, setName] = useState("");
+    const [difficulty, setDifficulty] = useState("");
+    const [duration, setDuration] = useState("");
+    const [season, setSeason] = useState("");
+    const [countries, setCountries] = useState([])
+    const [country, setCountry] = useState([])
+ 
     useEffect(()=>{
         dispatch(getAllCountries())
     }, [])
     
-    const handleChange = (e) => {
-        e.preventDefault()
-        setValue({
-            ...value,
-            [e.target.name]: e.target.value
-        })
-       
-    }
     
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        setErrorsValue(validateValue({
-            ...value,
-            [e.target.name] : e.target.value
-        }))
-        setErrorsValue(validateValue({
-            ...value,
-            countries: [...value.countries, e.target.value]
-        }))
+       const error1 = setErrorsValue(validateValue({countries, name, difficulty, duration, season}))
+            try{
+                await 
+                    axios.post(`http://localhost:3001/activity`, {  name, difficulty, duration, season, countries })
+                    .then((response) => {
+                    alert("Your activity has been created");
+                    document.formAct.reset();
+                    });
+                // fetch(`http://localhost:3001/activity`, {method: 'POST', body: { }})
+                // .then((response) => {
+                //   alert("Your activity has been created");
+                // });
+            }catch(e){
+                console.log("Error: " + e)
+            }
+        
     }
+
     const removeCountry = (e) =>{
-        setValue({  
-            ...value,
-            countries: value.countries.filter(c => c !== e.target.name)
-        })
+        setCountries( countries.filter(c => c !== e.target.name)
+        )
 
     }
+
 
     
     
@@ -58,12 +66,12 @@ const Form = (props) => {
              <img src={imageBackground} className="stretch" alt="" />  
         </div>
         <div className="divContainer">
-            <form className="container" onSubmit={e => handleSubmit(e)}>
+            <form className="container" name="formAct" onSubmit={e => handleSubmit(e)}>
             <h1>New Activity</h1>
-            <input className="activityName" name="name"  value={value.name} placeholder="Activity name..." onChange={e=> handleChange(e)}/>
+            <input className="activityName" name="name"   placeholder="Activity name..." onChange={e=> setName(e.target.value)}/>
             <p className="danger">{errorsValue.name}</p>
             <div>
-            <select name="duration" value={value.duration} onChange={handleChange}>
+            <select name="duration"  onChange={ e => setDuration(e.target.value)}>
                 <option hidden selected>Duration</option>
                 <option>30 min</option>
                 <option>1 Hr</option>
@@ -75,7 +83,7 @@ const Form = (props) => {
             <p className="danger">{errorsValue.duration}</p>
             </div>
             <div >
-            <select className="dif-ses" name="difficulty" value={value.difficulty} onChange={ handleChange}>
+            <select className="dif-ses" name="difficulty" onChange={ e =>  setDifficulty(e.target.value)}>
                 <option hidden selected>Difficulty</option>
                 <option>1</option>
                 <option>2</option>
@@ -83,7 +91,7 @@ const Form = (props) => {
                 <option>4</option>
                 <option>5</option>
             </select>
-            <select className="dif-ses" name="season" value={value.season} onChange={handleChange}>
+            <select className="dif-ses" name="season"  onChange={e => setSeason(e.target.value)}>
                 <option hidden selected>Season</option>
                 <option>Winter</option>
                 <option>Spring</option>
@@ -95,20 +103,16 @@ const Form = (props) => {
             </div>
             </div>
             <div>
-                <select name="country" value={value.countries} 
+                <select
                 onChange={ (e) => { 
                     e.preventDefault(e)
-                    setValue({
-                        ...value,
-                        countries: [...value.countries, e.target.value]
-                    })
+                    setCountry((country) =>  [...country, e.target.value])
+                    setCountries([...countries, e.target.value])
                     }}>
-                    <option hidden selected>Country</option>
                     {
                       props.countries?.map(c =>{
-                          
-                            return(
-                            <option key={c.id}>{c.name}</option>
+                          return(
+                            <option key={c.name} name={c.name} value={c.id} >{c.name}</option>
                             )
                         }
                         )
@@ -117,19 +121,23 @@ const Form = (props) => {
                 <p className="danger">{errorsValue.countries}</p>
             </div>
             <div>
-            <button type="submit" >Create Activity</button>
+            <button type="submit">Create Activity</button>
             </div>
             </form>
             <div className="countriesList">
                 <ul>
                 {
-                    value.countries?.map(el => {
-                      return ( 
-                          <div key={el.id}>
-                      <p className="lista">{el}</p>
+                    countries?.map((el) => {
+                        console.log(country)
+                        console.log(countries)
+                        let name = props.countries?.map((e) =>  e.id === el? e.name : null  )
+                        return ( 
+                            <div>
+                      <p key={el.id} className="lista">{name}</p>
                        <button name={el}className="closeButton" onClick={(e) => { removeCountry(e) }}>x</button>
                        </div>
                    )
+        
                     })
                 }
                 </ul>
@@ -144,24 +152,24 @@ const Form = (props) => {
 
 
 
-function validateValue(value){
+function validateValue({countries, name, duration, difficulty, season}){
     let errors = {}
-    if(!value.name){
+    if(!name){
         errors.name = "Name is required"
     }
-    if(!value.duration || value.duration === "Duration"){
+    if(!duration || duration === "Duration"){
         errors.duration = "Duration is required"
     }
-    if(!value.difficulty || value.difficulty === "Difficulty"){
+    if(!difficulty || difficulty === "Difficulty"){
         errors.difficulty = "Difficulty is required"
     }
-    if(!value.season || value.season === "Season"){
+    if(!season || season === "Season"){
         errors.season = "Season is required"
     }
-    if(!value.countries[0]){
+    if(!countries[0]){
         errors.countries = "Country is required"
     }
-    if(repetidos(value.countries)){
+    if(repetidos(countries)){
         errors.countries = "You cannot enter duplicate countries"
     }
     return errors;
@@ -177,7 +185,6 @@ const mapStateToProps = (state) =>{
        
     }
 }
-
 
 
 export default connect(mapStateToProps)(Form)

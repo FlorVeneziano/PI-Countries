@@ -103,3 +103,9 @@ export const orderContinent = (payload) => {
     }
 }
 
+export const createActivity = (payload) => {
+    return {
+        type: POST_ACTIVITY,
+        payload,
+    }
+}

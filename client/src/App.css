@@ -43,3 +43,20 @@ body{
     transform: rotate(360deg);
   }
 }
+
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(202, 196, 196);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(96, 128, 139);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(75, 105, 116);
+}

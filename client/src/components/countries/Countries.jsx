@@ -4,7 +4,7 @@ import { connect, useDispatch } from "react-redux";
 import {getAllCountries} from "../../actions/index";
 import Pagination from "../Pagination/Pagination";
 import Country from "../Country/Country";
-import imageBackground from "../../img/fondoCountry.jpg";
+import imageBackground from "../../img/nuevoFondo.jpg";
 import './Countries.css'
 import Filter from "../Filter/Filter";
 
