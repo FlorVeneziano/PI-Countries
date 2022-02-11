@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Back from "../Flechas/Next";
 import "./Pagination.css"
 
 function Pagination({page, setPage, max}) {
@@ -43,7 +42,6 @@ function Pagination({page, setPage, max}) {
 
     return(
         <div className="pagination">
-            {/* <Back className="flechitapiola" onClick={backPage} /> */}
             <button className="previousPage" onClick={backPage}> back </button>
             <input onChange={e => onChange(e)} onKeyDown={(e) => onKeyDown(e)} name="page" autoComplete="off" value={input} className="inputPage"  />
             <p>de {Math.ceil(max)}</p>

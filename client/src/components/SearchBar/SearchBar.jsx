@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { getAllCountries, getByName } from "../../actions";
-
+import "./SearchBar.css"
 
 
 
@@ -17,10 +17,10 @@ function SearchBar(){
             dispatch(getByName(arg));
       };
 
-    const handleChange = async (e) =>{
+    const handleChange =  (e) =>{
         e.preventDefault()
         busqueda(e.target.value)
-        await setValue(e.target.value)
+        setValue(e.target.value)
         console.log(e.target.value)
     }
     const handleSubmit = (e) => {
@@ -32,8 +32,8 @@ function SearchBar(){
     return(
         <div>
             
-                <input placeholder="Country..."  onChange={e => handleChange(e)}/>
-                <button type="submit" onSubmit={handleSubmit}>Search</button>
+                <input className="inputSearch" placeholder="Country..."  onChange={e => handleChange(e)}/>
+                <button className="bottonSearch" type="submit" onSubmit={handleSubmit}> <span className="text">Search </span></button>
 
         
         </div>

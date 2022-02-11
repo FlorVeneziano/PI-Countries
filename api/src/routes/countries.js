@@ -40,7 +40,7 @@ router.get("/", async (req, res) => { // localhost:3000/countries/
         const dbInfo = await Country.findAll({
             include: {
                 model: Activity,
-            }
+            },
         })
 
         if (dbInfo.length > 1) {

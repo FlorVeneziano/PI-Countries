@@ -1,9 +1,9 @@
-import { GET_ALL, GET_BY_NAME, GET_COUNTRY, ORDER_SORT, ORDER_POPULATION, ORDER_CONTINENT, POST_ACTIVITY } from '../actions/index'
+import { GET_ALL, GET_BY_NAME, GET_COUNTRY, ORDER_SORT, ORDER_POPULATION, ORDER_CONTINENT, ORDER_BY_ACTIVITIES, POST_ACTIVITY } from '../actions/index'
 
 const initialState = {
+    allCountries: [],
     countries: [],
     countryDetail: {},
-    activities: []
 }
 
 function rootReducer(state = initialState, action) {
@@ -12,7 +12,7 @@ function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 countries: action.payload,
-
+                allCountries: action.payload,
             }
         case GET_BY_NAME:
             return {
@@ -23,6 +23,10 @@ function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 countryDetail: action.payload
+            }
+        case POST_ACTIVITY:
+            return {
+                ...state
             }
         case ORDER_SORT:
             let arr = action.payload === "Desc" ?
@@ -73,16 +77,24 @@ function rootReducer(state = initialState, action) {
                 countries: order
             }
         case ORDER_CONTINENT:
-            const countriesAll = state.countries
-            const countriesFilter = action.payload === "All" ? countriesAll : countriesAll.filter(el => el.continent === action.payload)
+            const countriesFilter = action.payload === "All" ? state.allCountries : state.allCountries.filter(el => el.continent === action.payload)
             return {
                 ...state,
                 countries: countriesFilter
             }
-        case POST_ACTIVITY:
+        case ORDER_BY_ACTIVITIES:
+            let newArr = [];
+            for (let i = 0; i < action.payload[0].length; i++) {
+                for (let j = 0; j < action.payload[0][i].activities.length; j++) {
+                    if (action.payload[0][i].activities[j].name === action.payload[1]) {
+                        newArr.push(action.payload[0][i].id)
+                    }
+                }
+            }
+            let activityFilter = state.allCountries.filter(e => newArr.includes(e.id))
             return {
                 ...state,
-                activities: [...state.activities, action.payload]
+                countries: action.payload[1] === "All" ? state.allCountries : activityFilter,
             }
         default: {
             return state

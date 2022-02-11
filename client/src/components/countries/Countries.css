@@ -29,6 +29,43 @@ body{
     color: white;
     margin: 0
 }
+
+select{
+    background-color: rgba(255, 255, 255, 0);
+    color: rgb(224, 223, 223);
+    border: none;
+}
+
+option{
+    color: rgb(224, 223, 223);
+    background-color: rgb(70 95 104 / 62%);
+    backdrop-filter:  blur(5px);
+}
+
+.buttonAllCountries{
+    background-color: rgba(245, 245, 245, 0.082);
+    backdrop-filter: blur(5px);
+    border-radius: 10%;
+    padding: 5px 10px;
+    margin-top: 15px;
+    border-color: 1px solid #242424;
+    color:white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.buttonAllCountries:hover{
+    transition-delay: 0s;
+    color: rgba(255, 255, 255, 0.753);
+    box-shadow: 0 0 7px rgb(214, 214, 212),
+                0 0 10px rgb(214, 214, 212),
+                0 0 20px rgb(214, 214, 212),
+                0 0 30px rgb(214, 214, 212),
+                0 0 40px rgb(214, 214, 212);
+                transform: translateY(2px);
+
+}
+
 .Filtros{
     background-color: rgba(165, 195, 206, 0.26);
     backdrop-filter: blur(5px);

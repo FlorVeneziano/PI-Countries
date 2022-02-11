@@ -1,10 +1,10 @@
-import axios from "axios";
 export const GET_ALL = "GET_ALL";
 export const GET_COUNTRY = "GET_COUNTRY";
 export const GET_BY_NAME = "GET_BY_NAME";
 export const ORDER_SORT = "ORDER_SORT";
 export const ORDER_POPULATION = "ORDER_POPULATION";
 export const ORDER_CONTINENT = "ORDER_CONTINENT";
+export const ORDER_BY_ACTIVITIES = "ORDER_BY_ACTIVITIES";
 export const POST_ACTIVITY = "POST_ACTIVITY";
 const DBCOUNTRIES = "http://localhost:3001/countries/";
 
@@ -23,15 +23,19 @@ const DBCOUNTRIES = "http://localhost:3001/countries/";
 
 export function getAllCountries() {
     return function (dispatch) {
-        return fetch(DBCOUNTRIES)
-            .then(response => response.json())
-            .then(res => {
-                dispatch({
-                    type: GET_ALL,
-                    payload: res.dbInfo
-                })
+        try {
+            return fetch(DBCOUNTRIES)
+                .then(response => response.json())
+                .then(res => {
+                    dispatch({
+                        type: GET_ALL,
+                        payload: res.dbInfo
+                    })
 
-            })
+                })
+        } catch (e) {
+            console.log("getAllCountries " + e)
+        }
     }
 }
 
@@ -48,28 +52,36 @@ export function getAllCountries() {
 
 export function getByName(name) {
     return function (dispatch) {
-        return fetch("http://localhost:3001/countries?name=" + name)
-            .then(response => response.json())
-            .then(res => {
-                dispatch({
-                    type: GET_BY_NAME,
-                    payload: res
+        try {
+            return fetch("http://localhost:3001/countries?name=" + name)
+                .then(response => response.json())
+                .then(res => {
+                    dispatch({
+                        type: GET_BY_NAME,
+                        payload: res
+                    })
                 })
-            })
+        } catch (e) {
+            console.log("getByName " + e)
+        }
     }
 }
 export function getCountry(id) {
     return function (dispatch) {
-        return fetch(`http://localhost:3001/countries/${id}`)
-            .then(response => response.json())
-            .then(res => {
-                console.log(res)
-                dispatch({
-                    type: GET_COUNTRY,
-                    payload: res
-                })
+        try {
+            return fetch(`http://localhost:3001/countries/${id}`)
+                .then(response => response.json())
+                .then(res => {
+                    console.log(res)
+                    dispatch({
+                        type: GET_COUNTRY,
+                        payload: res
+                    })
 
-            })
+                })
+        } catch (e) {
+            console.log("getCountry " + e)
+        }
     }
 }
 // export const getCountry = (id) => {
@@ -103,9 +115,48 @@ export const orderContinent = (payload) => {
     }
 }
 
-export const createActivity = (payload) => {
-    return {
-        type: POST_ACTIVITY,
-        payload,
+export const orderByActivities = (activity) => {
+    return dispatch => {
+        try {
+            return fetch("http://localhost:3001/countries")
+                .then(response => response.json())
+                .then(res => {
+                    dispatch({
+                        type: ORDER_BY_ACTIVITIES,
+                        payload: [res.dbInfo, activity]
+                    })
+                })
+        } catch (e) {
+            console.log("orderByActivities " + e)
+        }
+    }
+
+}
+
+// axios.post(`http://localhost:3001/activity`, {  name, difficulty, duration, season, countries })
+// .then((response) => {
+// alert("Your activity has been created");
+// document.formAct.reset();
+// });
+
+export const postActivity = (payload) => {
+    return dispatch => {
+        try {
+            return fetch(`http://localhost:3001/activity`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            })
+                .then((response) => {
+                    dispatch({
+                        type: POST_ACTIVITY
+                    })
+                })
+        } catch (e) {
+            console.log("postActivity " + e)
+        }
     }
 }

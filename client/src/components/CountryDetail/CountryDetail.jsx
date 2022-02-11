@@ -3,6 +3,7 @@ import { connect, useDispatch} from "react-redux";
 import imageBackground from "../../img/nuevoFondo.jpg";
 import { getCountry } from "../../actions";
 import "./CountryDetail.css"
+import { Link } from "react-router-dom";
 
 function CountryDetail(props){
     console.log(props?.match.params.idName)
@@ -11,6 +12,7 @@ function CountryDetail(props){
 
     useEffect(()=>{
         dispatch(getCountry(params))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
 
@@ -23,28 +25,28 @@ function CountryDetail(props){
    <div className="infoContainer">
         <div className="card" id="information">
                 <h3 className="text" > Id : {props.country.idName}</h3>
-           <h2 className="text" id="title"> {props.country.name}</h2>
-           <div>
-                <p className="text"> Continent :</p> <p className="text"> {props.country.continent}</p>
+           <div  id="continent">
+                <p className="text" id="continentTitle"> Continent :</p> <p className="text" id="continentData"> {props.country.continent}</p>
             </div>
-            <div>
-                <p className="text">Capital : </p> <p className="text">{props.country.capital} </p>
+            <div id="capital">
+                <p className="text" id="titleUnderline" >Capital : </p> <p className="text">{props.country.capital} </p>
             </div>
-            <div>
-                <p className="text">Subregion : </p> <p className="text">{props.country.subregion}</p>
+            <div id="subregion"> 
+                <p className="text" id="titleUnderline">Subregion : </p> <p className="text">{props.country.subregion}</p>
             </div>
-            <div>
-                <p className="text">Population : </p> <p className="text">{props.country.population}</p> 
+            <div id="population">
+                <p className="text" id="titleUnderline">Population : </p> <p className="text">{props.country.population}</p> 
             </div>
-            <div>
-                <p className="text">Area : </p>   <p className="text">{props.country.area} km</p> 
+           <h2 className="text" id="title" > {props.country.name}</h2>
+            <div id="area">
+                <p className="text" id="titleUnderline" >Area : </p>   <p className="text">{props.country.area} km</p> 
             </div>
-                <img className="flag" src={props.country.image} alt="Bandera" /> 
+                <img className="flag" id="imageFlag" src={props.country.image} alt="Bandera" /> 
         </div>
         </div>
         <div className="activityContainer">
             <div className="card" id="activities">
-                <p className="text">Activities : </p> 
+                <p className="text" id="titleUnderline">Activities : </p> 
                 <div className="text" id="lista">{props.country.activities?.map( a => {
                     let summer= <span>☀️</span>;
                     let winter = <span>❄️</span>;
@@ -56,18 +58,22 @@ function CountryDetail(props){
                     if(a.season === "Autumn") season = autumn;
                     if(a.season === "Spring") season = spring;
                     return ( 
-                        <>
-                    <p key={a.id}> <span>	&#x1F5F8;</span> Name:  {a.name}  </p>
-                    <p> <span>&#128336;</span>Duration:  {a.duration}</p>
-                    <p><span>&#11088;</span>Difficulty:  {a.difficulty} </p>
-                    <p> <span>{season}</span>Season: {a.season} </p>
-                    </>
+                        <details>
+                            <summary>{a.name}</summary>
+                    <p key={a.id}> 	&#x1F5F8; Name:  {a.name}  </p>
+                    <p> &#128336;Duration:  {a.duration}</p>
+                    <p>&#11088;Difficulty:  {a.difficulty} </p>
+                    <p> {season}Season: {a.season} </p>
+                    
+                    </details>
                     )
                 })} </div> 
             </div>
             </div>
-         
              </div>
+             <Link to={"/countries"}>
+                <button className="text" id="buttonDetail">Go to main page</button>
+                </Link>
         </>
     )
 }

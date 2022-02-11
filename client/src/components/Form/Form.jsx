@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { connect, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { createActivity, getAllCountries } from "../../actions";
-import axios from "axios";
+import {  getAllCountries, postActivity } from "../../actions";
 import imageBackground from "../../img/fondoActivity.jpg"
+import Loading from "../../Loading/Loading";
 import "./Form.css"
 
 
@@ -12,45 +12,29 @@ import "./Form.css"
 const Form = (props) => {
     const dispatch = useDispatch()
     const[errorsValue, setErrorsValue] = useState({})
-    const [activity, setActivity] = useState({
-        name: "",
-        difficulty: "",
-        duration: "",
-        season: "",
-        countries: []
-    })
     const [name, setName] = useState("");
     const [difficulty, setDifficulty] = useState("");
     const [duration, setDuration] = useState("");
     const [season, setSeason] = useState("");
     const [countries, setCountries] = useState([])
     const [country, setCountry] = useState([])
- 
+    const [loading, setLoading] = useState(true)
     useEffect(()=>{
         dispatch(getAllCountries())
     }, [])
     
     
-    const handleSubmit = async (e) => {
+    const handleSubmit =  (e) => {
         e.preventDefault()
-       const error1 = setErrorsValue(validateValue({countries, name, difficulty, duration, season}))
-            try{
-                await 
-                    axios.post(`http://localhost:3001/activity`, {  name, difficulty, duration, season, countries })
-                    .then((response) => {
-                    alert("Your activity has been created");
-                    document.formAct.reset();
-                    });
-                // fetch(`http://localhost:3001/activity`, {method: 'POST', body: { }})
-                // .then((response) => {
-                //   alert("Your activity has been created");
-                // });
-            }catch(e){
-                console.log("Error: " + e)
-            }
-        
+       setErrorsValue(validateValue({countries, name, difficulty, duration, season}))
+       const error = validateValue({countries, name, difficulty, duration, season})
+       if(Object.values(error).length === 0){
+            dispatch(postActivity({name, difficulty, duration, season, countries}))
+            document.formAct.reset();
+          
+       }
     }
-
+ 
     const removeCountry = (e) =>{
         setCountries( countries.filter(c => c !== e.target.name)
         )
@@ -59,16 +43,17 @@ const Form = (props) => {
 
 
     
-    
     return(
         <>
         <div id="background"> 
-             <img src={imageBackground} className="stretch" alt="" />  
+            <img src={imageBackground} className="stretch" alt="" /> 
         </div>
-        <div className="divContainer">
+       {loading === true? <Loading  setLoading={setLoading} />  :
+    <> 
+        <div className="divContainer"> 
             <form className="container" name="formAct" onSubmit={e => handleSubmit(e)}>
-            <h1>New Activity</h1>
-            <input className="activityName" name="name"   placeholder="Activity name..." onChange={e=> setName(e.target.value)}/>
+            <h1 className="newActivity">New Activity</h1>
+            <input className="activityName" name="name"  autoComplete="off" placeholder="Activity name..." onChange={e=> setName(e.target.value)}/>
             <p className="danger">{errorsValue.name}</p>
             <div>
             <select name="duration"  onChange={ e => setDuration(e.target.value)}>
@@ -121,7 +106,7 @@ const Form = (props) => {
                 <p className="danger">{errorsValue.countries}</p>
             </div>
             <div>
-            <button type="submit">Create Activity</button>
+            <button type="submit" className="createActivity">Create Activity</button>
             </div>
             </form>
             <div className="countriesList">
@@ -133,8 +118,8 @@ const Form = (props) => {
                         let name = props.countries?.map((e) =>  e.id === el? e.name : null  )
                         return ( 
                             <div>
-                      <p key={el.id} className="lista">{name}</p>
-                       <button name={el}className="closeButton" onClick={(e) => { removeCountry(e) }}>x</button>
+                      <span key={el.id} className="lista">{name}</span>
+                       <button name={el}className="closeButton" onClick={(e) => { removeCountry(e) }}>❌</button>
                        </div>
                    )
         
@@ -144,8 +129,10 @@ const Form = (props) => {
             </div>
         </div>
         <Link to={"/countries"} >
-            <button>Go to Main Page</button>
+            <button className="mainPageButton">Go to Main Page</button>
         </Link>
+ </>
+}
         </>
     )
 }

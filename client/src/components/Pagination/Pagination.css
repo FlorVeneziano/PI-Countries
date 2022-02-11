@@ -17,6 +17,7 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    transition: 0.3s;
 }
 .inputPage{
     width: 30px;
@@ -26,3 +27,15 @@
     text-align: center;
 }
 
+.previousPage:hover , .nextPage:hover{
+
+    transition-delay: 0s;
+   color:  rgba(255, 255, 255, 0.753);
+    box-shadow: 0 0 7px rgb(214, 214, 212),
+                0 0 10px rgb(214, 214, 212),
+                0 0 20px rgb(214, 214, 212),
+                0 0 30px rgb(214, 214, 212),
+                0 0 40px rgb(214, 214, 212);
+                transform: translateY(2px);
+
+}

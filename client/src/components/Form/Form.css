@@ -18,11 +18,14 @@
       display: flex;
       color: white;
   }
+  .newActivity{
+    text-decoration: 1.5px solid underline ;
+  }
   .container{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: rgba(245, 245, 245, 0.082);
+    background-color: rgba(54, 54, 54, 0.226);
     backdrop-filter: blur(5px);
     border-radius: 5%;
     box-shadow: 2px 2px 4px rgba(0,0,0,0.25);
@@ -38,15 +41,21 @@
     text-align: center;
     border: 0;
     border-bottom: 1px solid white;
-    background-color: rgba(158, 158, 158, 0);
+    background-color: transparent;
     font-size: 18px;
+    color: white;
     
+  }
+  .activityName:focus, .activityName:active{
+    background-color: transparent;
+    border: 0;
+    border-bottom: 1px solid white;
   }
 
   .divContainer{
       display: flex;
       justify-content: center;
-      margin-top: 150px;
+      margin-top: 90px;
 
   }
   .countriesList{
@@ -59,4 +68,47 @@
     width: 250px;
     height: 500px;
     text-decoration: none;
+  }
+  
+  .closeButton{
+    background: transparent;
+    border: none;
+    position: relative;
+    left: 80px;  
+    top: -21px;
+  }
+  .createActivity{
+    width: fit-content;
+    position: relative;
+    left: 60px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 0;
+    color: white;
+    background-color:#d49d6a62;
+    padding: 5px;
+    transition: .3s;
+    cursor: pointer;
+  }
+  .createActivity:hover{
+    background-color:#f6d4b362;
+    transform: scale(1.1);
+  }
+
+  .mainPageButton{
+    width: fit-content;
+    position: relative;
+    left: 60px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 0;
+    color: white;
+    background-color:#d49d6a62;
+    padding: 5px;
+    transition: .3s;
+    cursor: pointer;
+  }
+  .mainPageButton:hover{
+    background-color:#f6d4b362;
+    transform: scale(1.1);
   }

@@ -1,0 +1,9 @@
+.loading{
+    position: absolute;
+    left: 700px;
+    top: 250px;
+  }
+
+  .timeout{
+      opacity: 0%;
+  }
