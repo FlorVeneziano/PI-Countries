@@ -19,23 +19,14 @@ function SearchBar(){
 
     const handleChange =  (e) =>{
         e.preventDefault()
-        busqueda(e.target.value)
+        busqueda(e.target.value) 
         setValue(e.target.value)
-        console.log(e.target.value)
     }
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        busqueda(value)
-        setValue("")
-    }
+   
 
     return(
-        <div>
-            
-                <input className="inputSearch" placeholder="Country..."  onChange={e => handleChange(e)}/>
-                <button className="bottonSearch" type="submit" onSubmit={handleSubmit}> <span className="text">Search </span></button>
-
-        
+        <div> 
+            <input className="inputSearch" placeholder="Country..."  onChange={e => handleChange(e)}/>
         </div>
     )
 }

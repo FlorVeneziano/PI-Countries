@@ -21,6 +21,8 @@ const getInfo = async () => {
 }
 
 
+
+
 const getDb = async () => {
     const dbInfo = await Country.findAll({
         attibute: ["name"],

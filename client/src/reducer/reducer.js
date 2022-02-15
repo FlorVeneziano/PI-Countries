@@ -15,9 +15,10 @@ function rootReducer(state = initialState, action) {
                 allCountries: action.payload,
             }
         case GET_BY_NAME:
+            console.log(action.payload)
             return {
                 ...state,
-                countries: action.payload
+                countries: action.payload === [] ? alert("Pais no encontrado") : action.payload
             }
         case GET_COUNTRY:
             return {

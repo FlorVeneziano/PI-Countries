@@ -1,27 +1,152 @@
 
 
-
-/* BOTON */
-
-.button-64 {
-    margin: auto;
-    position: fixed;
-    top: 50%;
-    left: 45%;
-    padding: 10px;
-    background-color: #007bff5e;
-    backdrop-filter: blur(2px);
-    border: 2px solid #007bff57;
-    border-radius: .25rem;
-    color: #007bff;
-    transition: .15s ease-in-out;
-    align-items: center;
-    cursor: pointer;
+.back{
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background: black;
+  color: #ccc;
+}
+.back::before,
+.back::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: .5vmin;
+  height: .5vmin;
+  border-radius: 50%;
+  color: transparent;
 }
 
-.button-64:hover, .btn-borde:active, .btn-borde:focus{
-  color: #fff;
-  background-color: #007bff96;
-  box-shadow: 0px 5px 15px 5px #007bffc0;
+.back::before {
+  box-shadow: 30vw 90vh .2vmin rgba(190,200,255,.9),
+  93vw 64vh .2vmin rgba(190,200,255,.9),
+  75vw 80vh .2vmin rgba(190,200,255,.9),
+  37vw 24vh .2vmin rgba(190,200,255,.9),
+  83vw 58vh .2vmin rgba(190,200,255,.9),
+  12vw 36vh .2vmin rgba(190,200,255,.9),
+  62vw 82vh .2vmin rgba(190,200,255,.9),
+  87vw 91vh .2vmin rgba(190,200,255,.9),
+  9vw 2vh .2vmin rgba(190,200,255,.9),
+  99vw 46vh .2vmin rgba(190,200,255,.9),
+  39vw 86vh .2vmin rgba(190,200,255,.9),
+  48vw 42vh .2vmin rgba(190,200,255,.9),
+  53vw 24vh .2vmin rgba(190,200,255,.9),
+  63vw 42vh .2vmin rgba(190,200,255,.9),
+  2vw 53vh .2vmin rgba(190,200,255,.9),
+  67vw 11vh .2vmin rgba(190,200,255,.9),
+  32vw 44vh .2vmin rgba(190,200,255,.9),
+  0vw 82vh .2vmin rgba(190,200,255,.9),
+  51vw 47vh .2vmin rgba(190,200,255,.9),
+  74vw 30vh .2vmin rgba(190,200,255,.9);
 }
 
+.back::after { 
+  box-shadow: 80vw 64vh .1vmin rgba(200,255,230,.7),
+              32vw 45vh .1vmin rgba(200,255,230,.7),
+              65vw 62vh .1vmin rgba(200,255,230,.7),
+              22vw 55vh .1vmin rgba(200,255,230,.7),
+              68vw 19vh .1vmin rgba(200,255,230,.7),
+              54vw 34vh .1vmin rgba(200,255,230,.7),
+              1vw 56vh .1vmin rgba(200,255,230,.7),
+              95vw 1vh .1vmin rgba(200,255,230,.7),
+              60vw 93vh .1vmin rgba(200,255,230,.7),
+              14vw 82vh .1vmin rgba(200,255,230,.7),
+              6vw 64vh .1vmin rgba(200,255,230,.7),
+              19vw 12vh .1vmin rgba(200,255,230,.7),
+              25vw 39vh .1vmin rgba(200,255,230,.7),
+              21vw 36vh .1vmin rgba(200,255,230,.7),
+              4vw 10vh .1vmin rgba(200,255,230,.7),
+              85vw 70vh .1vmin rgba(200,255,230,.7),
+              54vw 93vh .1vmin rgba(200,255,230,.7),
+              9vw 46vh .1vmin rgba(200,255,230,.7),
+              63vw 59vh .1vmin rgba(200,255,230,.7),
+              48vw 28vh .1vmin rgba(200,255,230,.7);
+}
+
+.h1Planet {
+  margin: 0;
+  height: 12vmin;
+  width: 120vmin;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  top: 280px;
+  left: 350px;
+  -webkit-transition: 1s ease;
+  transition:  1s ease;
+}
+
+.h1Planet::before {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: -1;
+  top: -15vmin;
+  left: 26vmin;
+  width: 45vmin;
+  height: 45vmin;
+  border-radius: 50%;
+  border: 1.3vmin solid rgba(255, 255, 255, 0.856);
+  box-sizing: border-box;
+}
+.h1Planet:hover{
+  transform: scale(1.1);
+}
+
+em {
+  font-family: 'Josefin Sans', sans-serif;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.959);
+  text-shadow: 0 0 15px rgba(199, 197, 197, 0.5), 0 0 10px rgba(187, 187, 187, 0.5);
+  font-size: 15vmin;
+  position: relative;
+  font-style: normal;
+  width: 20vmin;
+  text-align: center;
+
+}
+
+em.planet {
+  -webkit-animation: planet-rotate 4s linear infinite;
+  animation: planet-rotate 4s linear infinite;
+  position: relative;
+
+}
+
+em.planet::before {
+  content: "";
+  position: absolute;
+  top: 3vmin;
+  left: 5vmin;
+  z-index: -1;
+  width: 10vmin;
+  height: 11vmin;
+  border-radius: 50%;
+  background: black;
+}
+
+em.planet.left {
+  -webkit-transform-origin: 31vmin 5vmin;
+  transform-origin: 31vmin 5vmin;
+}
+
+em.planet.right {
+  -webkit-transform-origin: -11vmin 5vmin;
+  transform-origin: -11vmin 5vmin;
+}
+
+@-webkit-keyframes planet-rotate {
+  to {
+    -webkit-transform: rotate(1turn);
+  }
+}
+
+@keyframes planet-rotate {
+  to {
+    transform: rotate(1turn);
+  }
+}

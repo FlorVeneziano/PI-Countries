@@ -134,8 +134,10 @@ details{
     border-radius: 5px;
     background-color: #3f4d53;
     transition: .3s;
+    padding: 5px;
     cursor: pointer;
  }
  #buttonDetail:hover{
    background-color:  #a1bec8;
+   transform: scale(1.1);
  }

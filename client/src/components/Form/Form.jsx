@@ -30,8 +30,8 @@ const Form = (props) => {
        const error = validateValue({countries, name, difficulty, duration, season})
        if(Object.values(error).length === 0){
             dispatch(postActivity({name, difficulty, duration, season, countries}))
+            alert("Activity created")
             document.formAct.reset();
-          
        }
     }
  
@@ -56,7 +56,7 @@ const Form = (props) => {
             <input className="activityName" name="name"  autoComplete="off" placeholder="Activity name..." onChange={e=> setName(e.target.value)}/>
             <p className="danger">{errorsValue.name}</p>
             <div>
-            <select name="duration"  onChange={ e => setDuration(e.target.value)}>
+            <select className="select" name="duration"  onChange={ e => setDuration(e.target.value)}>
                 <option hidden selected>Duration</option>
                 <option>30 min</option>
                 <option>1 Hr</option>
@@ -88,12 +88,13 @@ const Form = (props) => {
             </div>
             </div>
             <div>
-                <select
+                <select className="select"
                 onChange={ (e) => { 
                     e.preventDefault(e)
                     setCountry((country) =>  [...country, e.target.value])
                     setCountries([...countries, e.target.value])
                     }}>
+                        <option hidden>Countries</option>
                     {
                       props.countries?.map(c =>{
                           return(

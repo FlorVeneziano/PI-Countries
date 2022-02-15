@@ -9,7 +9,7 @@ router.get('/:idPais', async (req, res) => {
     const { idPais } = req.params;
     try {
         const id = await Country.findOne({ where: { idName: idPais }, include: { model: Activity } })
-        id ? res.json(id) : res.send("El país no existe")
+        id ? res.json(id) : res.status(400).json({ msg: "El país no existe" })
 
     } catch (e) {
         res.json({ msg: "Error al encontrar país por ID" })

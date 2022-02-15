@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllCountries, orderContinent, orderPopulation, orderSort, orderByActivities } from "../../actions";
 
-function Filter({setPage, setOrder, page}){
+function Filter({setOrder}){
     
     const dispatch = useDispatch();
 
@@ -30,6 +30,7 @@ function Filter({setPage, setOrder, page}){
     const handleActivities = (e) => {
         dispatch(orderByActivities(e.target.value))
     }
+
     const countries = useSelector(state => state.allCountries)
 
     let Activities = [] //guardo todas las actividades
@@ -54,6 +55,8 @@ function Filter({setPage, setOrder, page}){
     
     return(
         <div>
+
+
              <select defaultValue={"DEFAULT"} onChange={(e) => handleActivities(e)} >
                   <option value="DEFAULT" hidden>Sort by Activities</option>
                   <option value="All"> All</option>
@@ -64,6 +67,8 @@ function Filter({setPage, setOrder, page}){
                             )
                         })   
                     }
+
+
                 </select>
                 <select defaultValue={"DEFAULT"} onChange={e => handleContinent(e)}>
                 <option value="DEFAULT" hidden>Continents</option>
@@ -75,16 +80,22 @@ function Filter({setPage, setOrder, page}){
                 <option value="Europe">Europe</option>
                 <option value="Oceania">Oceania</option>
                 </select>
+
+
                 <select defaultValue={"DEFAULT"} onChange={e => handleSort(e)}>
                     <option value="DEFAULT" hidden>Alphabetic</option>
                     <option value="Asc">A-Z</option>
                     <option value="Desc">Z-A</option>
                 </select>
+
+
                 <select defaultValue={"DEFAULT"} onChange={e=> handlePopulation(e)}>
                 <option value="DEFAULT" hidden>Sort by Population </option>
                     <option value="Asc">Ascending Population</option>
                     <option value="Desc">Descending Population</option>
                 </select>
+
+
                 <button className="buttonAllCountries" onClick={cargeCountries} >All Countries</button>
         </div>
     )

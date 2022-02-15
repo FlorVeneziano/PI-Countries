@@ -1,11 +1,11 @@
 #background { 
-    opacity: 0.92;
+    opacity: 0.98;
     width: 100%; 
     height: 100%; 
     position: fixed; 
     left: 0px; 
     top: 0px; 
-    z-index: -9999;
+    z-index: -1;
  }
 
 .stretch { 
@@ -14,14 +14,13 @@
 }
 .countries{
     margin-top: 50px;
-    margin-left: 10%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
-    grid-column-gap: 5px;
+    grid-column-gap: 30px;
     grid-row-gap: 100px;
+    justify-items: center;
   
-   
 }
 
 
@@ -31,9 +30,20 @@ body{
 }
 
 select{
-    background-color: rgba(255, 255, 255, 0);
+    /* background-color: rgba(255, 255, 255, 0);
+    border: 1px solid white;
+    border-radius: 5%; */
     color: rgb(224, 223, 223);
-    border: none;
+    background-color: rgba(255, 255, 255, 0);
+    border: 1px solid rgba(255, 255, 255, 0.719);
+    border-radius: 5px;
+    margin: 5px;
+    padding: 2px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+select:hover{
+    background-color: #6f91a0;
 }
 
 option{
@@ -69,7 +79,7 @@ option{
 .Filtros{
     background-color: rgba(165, 195, 206, 0.26);
     backdrop-filter: blur(5px);
-    border-radius: 5px;
+    border-radius: 10px;
     width: 550px;
     height: 150px;
     display: flex;
@@ -80,4 +90,30 @@ option{
 .panel{
     display: flex;
     justify-content: center;
+}
+
+.alert{
+    font-size: 50px;
+    position: absolute;
+    top: 350px;
+    left: 540px;
+    text-shadow:1px 6px 6px  black;
+    background-color: #3e565faf;
+    padding: 20px;
+    border-radius: 5% ;
+    backdrop-filter: blur(2px);
+}
+.up{
+    border-radius: 50%;
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+    margin-right: 15px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: none;
+    font-size: 30px;
+    background-color:rgb(165, 195, 206) ;
+    color: white;
+    cursor: pointer;
 }

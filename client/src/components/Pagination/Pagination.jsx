@@ -18,8 +18,8 @@ function Pagination({page, setPage, max}) {
         setInput(input - 1)
         setPage(page - 1)
         }else{
-        setInput(1)
-        setPage(1)
+        setInput(28)
+        setPage(28)
         }
     }    
 
@@ -42,10 +42,10 @@ function Pagination({page, setPage, max}) {
 
     return(
         <div className="pagination">
-            <button className="previousPage" onClick={backPage}> back </button>
+            <button className="previousPage" onClick={backPage}> 	&#11164;  </button>
             <input onChange={e => onChange(e)} onKeyDown={(e) => onKeyDown(e)} name="page" autoComplete="off" value={input} className="inputPage"  />
             <p>de {Math.ceil(max)}</p>
-            <button className="nextPage" onClick={nextPage}>next</button>
+            <button className="nextPage" onClick={nextPage}>	&#11166;</button>
 
         </div>
     )
