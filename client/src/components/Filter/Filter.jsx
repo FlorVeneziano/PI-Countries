@@ -1,23 +1,24 @@
 import React from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllCountries, orderContinent, orderPopulation, orderSort, orderByActivities } from "../../actions";
 
 function Filter({setOrder}){
     
     const dispatch = useDispatch();
-
-
+    
     const handleSort = (e) =>{
-        e.preventDefault();
         dispatch(orderSort(e.target.value))
         setOrder(`Order ${e.target.value}`)
     }
     const handlePopulation = (e) =>{
-        e.preventDefault();
         dispatch(orderPopulation(e.target.value))
         setOrder(`Order ${e.target.value}`)
     }
-
+    useEffect(() =>{
+        setOrder("Ordenado")
+    }, [handleSort, handlePopulation])
+    
     const handleContinent = (e) =>{
         e.preventDefault()
         dispatch(orderContinent(e.target.value))
@@ -83,14 +84,14 @@ function Filter({setOrder}){
 
 
                 <select defaultValue={"DEFAULT"} onChange={e => handleSort(e)}>
-                    <option value="DEFAULT" hidden>Alphabetic</option>
+                    <option value="DEFAULT" >Alphabetic</option>
                     <option value="Asc">A-Z</option>
                     <option value="Desc">Z-A</option>
                 </select>
 
 
                 <select defaultValue={"DEFAULT"} onChange={e=> handlePopulation(e)}>
-                <option value="DEFAULT" hidden>Sort by Population </option>
+                <option value="DEFAULT" >Sort by Population </option>
                     <option value="Asc">Ascending Population</option>
                     <option value="Desc">Descending Population</option>
                 </select>

@@ -1,10 +1,13 @@
-import { GET_ALL, GET_BY_NAME, GET_COUNTRY, ORDER_SORT, ORDER_POPULATION, ORDER_CONTINENT, ORDER_BY_ACTIVITIES, POST_ACTIVITY } from '../actions/index'
+import { GET_ALL, GET_BY_NAME, GET_COUNTRY, ORDER_SORT, ORDER_POPULATION, ORDER_CONTINENT, ORDER_BY_ACTIVITIES, POST_ACTIVITY, GET_ERROR } from '../actions/index'
 
 const initialState = {
     allCountries: [],
     countries: [],
     countryDetail: {},
+    error: ""
 }
+
+
 
 function rootReducer(state = initialState, action) {
     switch (action.type) {
@@ -18,7 +21,14 @@ function rootReducer(state = initialState, action) {
             console.log(action.payload)
             return {
                 ...state,
-                countries: action.payload === [] ? alert("Pais no encontrado") : action.payload
+                countries: action.payload
+            }
+        case GET_ERROR:
+            console.log(action.payload)
+            return {
+                ...state,
+                error: action.payload,
+                countries: []
             }
         case GET_COUNTRY:
             return {
@@ -54,20 +64,19 @@ function rootReducer(state = initialState, action) {
                 countries: arr
             }
         case ORDER_POPULATION:
-            let order = action.payload === "Desc" ?
-                state.countries.sort((a, b) => {
-                    if (a.population > b.population) {
-                        return -1 // los cambia
-                    } else if (b.population > a.population) {
-                        return 1 //los cambia
-                    } else {
-                        return 0 //los deja igual
-                    }
-                }) :
+            let order = action.payload === "Asc" ?
                 state.countries.sort((a, b) => {
                     if (a.population < b.population) {
                         return -1 // los cambia
                     } else if (b.population < a.population) {
+                        return 1 //los cambia
+                    } else {
+                        return 0 //los deja igual
+                    }
+                }) : state.countries.sort((a, b) => {
+                    if (a.population > b.population) {
+                        return -1 // los cambia
+                    } else if (b.population > a.population) {
                         return 1 //los cambia
                     } else {
                         return 0 //los deja igual

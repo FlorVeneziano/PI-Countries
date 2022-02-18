@@ -6,6 +6,7 @@ export const ORDER_POPULATION = "ORDER_POPULATION";
 export const ORDER_CONTINENT = "ORDER_CONTINENT";
 export const ORDER_BY_ACTIVITIES = "ORDER_BY_ACTIVITIES";
 export const POST_ACTIVITY = "POST_ACTIVITY";
+export const GET_ERROR = "GET_ERROR";
 const DBCOUNTRIES = "http://localhost:3001/countries/";
 
 
@@ -31,7 +32,6 @@ export function getAllCountries() {
                         type: GET_ALL,
                         payload: res.dbInfo
                     })
-
                 })
         } catch (e) {
             console.log("getAllCountries " + e)
@@ -56,10 +56,18 @@ export function getByName(name) {
             return fetch("http://localhost:3001/countries?name=" + name)
                 .then(response => response.json())
                 .then(res => {
-                    dispatch({
-                        type: GET_BY_NAME,
-                        payload: res
-                    })
+                    console.log(res)
+                    if (!res.msg) {
+                        dispatch({
+                            type: GET_BY_NAME,
+                            payload: res
+                        })
+                    } else {
+                        dispatch({
+                            type: GET_ERROR,
+                            payload: res.msg
+                        })
+                    }
                 })
         } catch (e) {
             console.log("getByName " + e)
@@ -72,7 +80,7 @@ export function getCountry(id) {
             return fetch(`http://localhost:3001/countries/${id}`)
                 .then(response => response.json())
                 .then(res => {
-                    console.log(res)
+
                     dispatch({
                         type: GET_COUNTRY,
                         payload: res

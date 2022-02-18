@@ -26,7 +26,7 @@ router.get('/', async (req, res, next) => { // localhost:3000/countries/
         const pais = await Country.findAll({ include: { model: Activity } })
         if (name) {
             let paisName = await pais.filter(el => el.name.toLowerCase().includes(name.toLowerCase()))
-            paisName ? res.status(200).json(paisName) : res.status(400).send("No se encontro el pais")
+            paisName.length ? res.status(200).json(paisName) : res.status(404).json({ msg: "Country not found" })
         } else {
             next()
         }
