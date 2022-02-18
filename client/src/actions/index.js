@@ -39,6 +39,9 @@ export function getAllCountries() {
     }
 }
 
+
+
+
 // export const getByName = (name) => {
 //     return async dispatch => {
 //         let response = await axios.get("http://localhost:3001/countries?name=" + name)
