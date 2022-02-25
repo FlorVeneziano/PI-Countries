@@ -17,8 +17,6 @@ const DBCOUNTRIES = "http://localhost:3001/countries/";
 //             type: GET_ALL,
 //             payload: response.data.dbInfo
 //         })
-
-
 //     }
 // }
 
