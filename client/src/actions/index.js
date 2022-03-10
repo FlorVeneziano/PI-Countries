@@ -7,7 +7,7 @@ export const ORDER_CONTINENT = "ORDER_CONTINENT";
 export const ORDER_BY_ACTIVITIES = "ORDER_BY_ACTIVITIES";
 export const POST_ACTIVITY = "POST_ACTIVITY";
 export const GET_ERROR = "GET_ERROR";
-const DBCOUNTRIES = "http://localhost:3001/countries/";
+const DBCOUNTRIES = "https://pi-country.herokuapp.com/countries";
 
 
 // export const getAllCountries = () => {
@@ -54,7 +54,7 @@ export function getAllCountries() {
 export function getByName(name) {
     return function (dispatch) {
         try {
-            return fetch("http://localhost:3001/countries?name=" + name)
+            return fetch("https://pi-country.herokuapp.com/countries?name=" + name)
                 .then(response => response.json())
                 .then(res => {
                     console.log(res)
@@ -78,7 +78,7 @@ export function getByName(name) {
 export function getCountry(id) {
     return function (dispatch) {
         try {
-            return fetch(`http://localhost:3001/countries/${id}`)
+            return fetch(`https://pi-country.herokuapp.com/countries/${id}`)
                 .then(response => response.json())
                 .then(res => {
 
@@ -127,7 +127,7 @@ export const orderContinent = (payload) => {
 export const orderByActivities = (activity) => {
     return dispatch => {
         try {
-            return fetch("http://localhost:3001/countries")
+            return fetch("https://pi-country.herokuapp.com/countries")
                 .then(response => response.json())
                 .then(res => {
                     dispatch({
@@ -151,7 +151,7 @@ export const orderByActivities = (activity) => {
 export const postActivity = (payload) => {
     return dispatch => {
         try {
-            return fetch(`http://localhost:3001/activity`, {
+            return fetch(`https://pi-country.herokuapp.com/activity`, {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
